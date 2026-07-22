@@ -1,123 +1,69 @@
 ---
 title: "Event 2"
-date: 2024-01-01
-weight: 1
+date: 2026-05-15
+weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
+# Career Orientation & Cloud/Data Industry Sharing for Swinburne Vietnam Students
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+> **Event Video:** [Watch on YouTube](https://www.youtube.com/watch?v=FKtMkUqyny4)
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Provide career orientation and practical industry insights into Cloud Computing, Data Engineering, and professional career growth for students.
+- Help students understand recruitment shifts in the AI era and bridge the gap between academic learning and real-world enterprise requirements.
+- Equip students with system architectural thinking, essential soft skills, and sustainable career development strategies.
 
-### Speakers
+### Speakers List
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **Mr. Nguyen Gia Hung** – Head of Solution Architect, AWS
+- **Mr. Banh Cam Vinh** – Data Practice Lead, Renova Cloud
+- **Ms. Nhu Tran** – Senior Account Manager, AWS
+- **Mr. Khang Nguyen** – Cloud Solutions Architect, Cloud Kinetics (Swinburne Alumni)
 
-### Key Highlights
+---
 
-#### Identifying the drawbacks of legacy application architecture
+### Key Highlights & Sessions
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+#### 1. Mr. Nguyen Gia Hung (AWS) – IT Labor Market & The AI Era
+- **Market Reality:** The IT job market is highly competitive. Workforce models are shifting toward **Senior + AI**, gradually replacing traditional Junior roles.
+- **New Hiring Standards:** Fresh graduates are expected to demonstrate higher practical capabilities than before.
+- **Advice:** Emphasized building a hands-on **technical portfolio** on GitHub/Blogs and actively engaging in tech communities to expand career opportunities.
 
-#### Transitioning to modern application architecture – Microservices
+#### 2. Mr. Banh Cam Vinh (Renova Cloud) – Data Projects: Academia vs. Enterprise Reality
+- **Real-World Contrast:**
+  - *In Academia:* Clean datasets, well-defined assignment requirements, flexible timelines.
+  - *In Enterprise:* Messy/dirty data, constantly changing business requirements, tight deadline pressure.
+- **Core Mindset:** Focus on mastering **Architecture Thinking** rather than memorizing ephemeral tools.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### 3. Ms. Nhu Tran (AWS) – Soft Skills, Visibility & Hidden Opportunities
+- **Overcoming Psychological Barriers:** Discussed overcoming fear of failure and judgment when asking questions.
+- **Building Visibility:** Highlighted communication skills (including small talk with leadership) to establish presence and initiative.
+- **Networking:** Shared strategies for uncovering **"hidden opportunities"** through positive professional networking.
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+#### 4. Mr. Khang Nguyen (Cloud Kinetics) – Learning Mindset & Early Career Orientation
+- **AI Over-reliance Warning:** Warned against relying on AI for coursework at the expense of fundamental **understanding**.
+- **Learning Purpose:** Urged students to learn for true competence rather than just passing exams.
+- **Early Career Priorities:** In early career stages, prioritize gaining **experience, exposure, and professional networks** over initial compensation.
 
-#### Domain-Driven Design (DDD)
-
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
-
-#### Event-Driven Architecture
-
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+---
 
 ### Key Takeaways
 
-#### Design Mindset
+1. **Preparing for the AI Era:**
+   - AI raises the hiring bar. Junior/Intern roles now require hands-on skills equivalent to 2-3 years of past experience. Use AI as leverage to learn faster, but **never outsource your own understanding to AI**.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+2. **Master Fundamentals & Architecture Thinking:**
+   - Tools evolve rapidly, but core fundamentals (Databases, Data Structures, Networking) remain constant. Understand the big picture and system interconnections.
 
-#### Technical Architecture
+3. **Technical Competence Meets Business Understanding:**
+   - Enterprises hire engineers to solve business problems. Technical skills without business domain context make engineers easily replaceable.
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+4. **Success Formula:**
+   $$\text{Success} = \text{Capability} \times \text{Visibility} \times \text{Consistency}$$
+   - Technical talent alone is insufficient if nobody knows your work. Share personal projects publicly on GitHub/Blogs and contribute to communities.
 
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+5. **Attitude Over Aptitude at the Starting Line:**
+   - Growth mindset, asking "Why?", resilience in failure, and lifelong learning are the most critical qualities employers evaluate in fresh graduates.

@@ -40,7 +40,7 @@ Alight evaluated several solutions, including New Relic, Dynatrace, and Amazon C
 
 Alight partnered with AWS to design a cloud-native log aggregation architecture:
 
-![Cross-account architecture diagram](images/3-Blogs/Blog-2/image-1.jpeg)
+![Cross-account architecture diagram](/images/3-Blogs/Blog-2/image-1.jpeg)
 <span class="meta-info">*Figure 1 — Cross-account log ingestion architecture*</span>
 
 * **Cross-Account Design:** ECS and EC2 workloads in application accounts send logs to the OpenSearch domain located in a Shared Services account.

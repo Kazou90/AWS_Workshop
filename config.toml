@@ -1,5 +1,5 @@
 baseURL = "https://kazou90.github.io/AWS_Workshop/"
-relativeURLs = true
+relativeURLs = false
 canonifyURLs = true
 defaultContentLanguage = "en"
 

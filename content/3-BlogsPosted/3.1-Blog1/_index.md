@@ -19,10 +19,10 @@ As a best practice, keep Dev/QA clusters on the [Current patch track](https://do
 
 The solution uses native AWS services to create an automated validation pipeline.
 
-![Architecture diagram of the patch testing pipeline](images/3-Blogs/Blog-1/image-1.png)
+![Architecture diagram of the patch testing pipeline](/images/3-Blogs/Blog-1/image-1.png)
 <span class="meta-info">*Figure 1 — High-level architecture diagram*</span>
 
-![Process overview showing the four stages: event detection, orchestration, test execution, and reporting](images/3-Blogs/Blog-1/image-2.png)
+![Process overview showing the four stages: event detection, orchestration, test execution, and reporting](/images/3-Blogs/Blog-1/image-2.png)
 <span class="meta-info">*Figure 2 — Process overview*</span>
 
 * **Event Detection:** When the Amazon Redshift cluster receives a patch or modification, [cluster event notifications](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html) fire. [Amazon EventBridge rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html) match these events automatically.

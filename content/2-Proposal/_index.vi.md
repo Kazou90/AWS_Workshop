@@ -49,11 +49,11 @@ Kết quả phân tích được trình bày qua **R Shiny dashboards** tương 
 
 ### 3. Kiến trúc giải pháp
 
-![Sơ đồ Kiến trúc Hệ thống Tổng quan](images/2-Proposal/AWS_Architecture_2.jpg)
+![Sơ đồ Kiến trúc Hệ thống Tổng quan](/images/2-Proposal/AWS_Architecture_2.jpg)
 
-![Sơ đồ Kiến trúc Nền tảng Platform Architecture](images/2-Proposal/platform_architecture.jpeg)
+![Sơ đồ Kiến trúc Nền tảng Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
 
-![Sơ đồ Kiến trúc Edge Distribution](images/2-Proposal/edge_architecture.jpeg)
+![Sơ đồ Kiến trúc Edge Distribution](/images/2-Proposal/edge_architecture.jpeg)
 
 #### Dịch vụ AWS sử dụng
 

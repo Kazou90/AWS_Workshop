@@ -40,7 +40,7 @@ Alight đã đánh giá một số giải pháp như New Relic, Dynatrace và Am
 
 Alight hợp tác với AWS thiết kế kiến trúc gom logs dạng đám mây gốc:
 
-![Sơ đồ kiến trúc tài khoản chéo](images/3-Blogs/Blog-2/image-1.jpeg)
+![Sơ đồ kiến trúc tài khoản chéo](/images/3-Blogs/Blog-2/image-1.jpeg)
 *Hình 1 — Sơ đồ kiến trúc thu thập logs tài khoản chéo (cross-account)*
 
 * **Mô hình tài khoản chéo:** Các ứng dụng ECS và EC2 chạy ở các tài khoản ứng dụng (application accounts) gửi logs trực tiếp về OpenSearch domain đặt tại tài khoản dịch vụ chung (shared services account).

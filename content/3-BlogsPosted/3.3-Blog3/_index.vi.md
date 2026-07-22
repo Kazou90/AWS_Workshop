@@ -19,7 +19,7 @@ Bài viết này trình bày chi tiết cách tận dụng các dịch vụ khô
 
 Giải pháp sử dụng Amazon API Gateway, AWS Lambda và Amazon Kinesis Data Streams để tiếp nhận và xử lý dữ liệu clickstream. Sau đó, Amazon Kinesis Data Firehose được dùng để lưu trữ dữ liệu thô vào Amazon S3, tiếp theo là Amazon Athena và Amazon QuickSight để phân tích và trực quan hóa các tương tác của người dùng.
 
-![Sơ đồ kiến trúc Clickstream](images/3-Blogs/Blog-3/image-1.png)
+![Sơ đồ kiến trúc Clickstream](/images/3-Blogs/Blog-3/image-1.png)
 *Hình 1 — Sơ đồ luồng dữ liệu Clickstream Serverless*
 
 1. **Tiếp nhận (Ingestion):** Ứng dụng khách (ví dụ: cổng thông tin web) gửi các payload clickstream (dữ liệu nhấp chuột, lượt xem trang, thời gian ở lại trang, lượt gửi form) đến **Amazon API Gateway**.

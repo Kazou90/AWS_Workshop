@@ -41,7 +41,7 @@ Hour-based partitioning makes batch ETL more efficient (e.g., process the previo
 
 ## 5.3.3 Lambda Ingest Design — `clickstream-lambda-ingest`
 
-![Lambda Ingest](images/aws-lambda-clickstream-ingest-config.png)
+![Lambda Ingest](/images/aws-lambda-clickstream-ingest-config.png)
 
 ### Responsibilities
 
@@ -69,7 +69,7 @@ The HTTP API exposes a public HTTPS endpoint for event ingestion:
 - Route:
   - `POST /clickstream` → Lambda `clickstream-lambda-ingest`  
 
-![Route POST /clickstream](images/aws-apigw-clickstream-routes.png)
+![Route POST /clickstream](/images/aws-apigw-clickstream-routes.png)
 
 Recommended settings:
 

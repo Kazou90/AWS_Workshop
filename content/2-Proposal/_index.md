@@ -49,11 +49,11 @@ The results are rendered as interactive **R Shiny dashboards**, giving business 
 
 ### 3. Solution Architecture
 
-![Overall Solution Architecture Diagram](images/2-Proposal/AWS_Architecture_2.jpg)
+![Overall Solution Architecture Diagram](/images/2-Proposal/AWS_Architecture_2.jpg)
 
-![Platform Architecture Diagram](images/2-Proposal/platform_architecture.jpeg)
+![Platform Architecture Diagram](/images/2-Proposal/platform_architecture.jpeg)
 
-![Edge Distribution Architecture Diagram](images/2-Proposal/edge_architecture.jpeg)
+![Edge Distribution Architecture Diagram](/images/2-Proposal/edge_architecture.jpeg)
 
 #### AWS Services Used
 

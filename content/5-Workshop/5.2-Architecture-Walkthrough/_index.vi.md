@@ -5,7 +5,7 @@ chapter: false
 pre: " <b> 5.2. </b> "
 ---
 
-![Architecture](images/architecture.png)
+![Architecture](/images/architecture.png)
 <p align="center"><em>Hình: Batch-based Clickstream Analytics Platform.</em></p>
 
 ---

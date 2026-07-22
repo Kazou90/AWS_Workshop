@@ -74,4 +74,4 @@ pre: " <b> 4.2. </b> "
 
 ### Hình Ảnh Sự Kiện
 
-![Hình ảnh tham gia sự kiện Cloud Architect Meetup](images/event-2.jpg)
+![Hình ảnh tham gia sự kiện Cloud Architect Meetup](/images/event-2.jpg)

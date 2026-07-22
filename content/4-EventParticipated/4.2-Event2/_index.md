@@ -72,4 +72,4 @@ pre: " <b> 4.2. </b> "
 
 ### Event Photos
 
-![Cloud Architect Meetup Event Photo](images/event-2.jpg)
+![Cloud Architect Meetup Event Photo](/images/event-2.jpg)

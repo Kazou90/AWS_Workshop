@@ -27,7 +27,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From April 17, 2026 to July 10, 2026
 
-![Nguyen Vu Thanh Nam](images/avatar.jpg)
+![Nguyen Vu Thanh Nam](/images/avatar.jpg)
 
 ### Report Content
 

@@ -19,10 +19,10 @@ Theo khuyến nghị thực hành tốt nhất (best practice), hãy giữ các 
 
 Giải pháp này sử dụng các dịch vụ gốc (native services) của AWS để tạo nên một quy trình xác thực tự động.
 
-![Sơ đồ kiến trúc của quy trình kiểm thử bản vá](images/3-Blogs/Blog-1/image-1.png)
+![Sơ đồ kiến trúc của quy trình kiểm thử bản vá](/images/3-Blogs/Blog-1/image-1.png)
 <span class="meta-info">*Hình 1 — Sơ đồ kiến trúc tổng quan*</span>
 
-![Tổng quan quy trình gồm bốn giai đoạn: phát hiện sự kiện, điều phối, thực thi kiểm thử và báo cáo](images/3-Blogs/Blog-1/image-2.png)
+![Tổng quan quy trình gồm bốn giai đoạn: phát hiện sự kiện, điều phối, thực thi kiểm thử và báo cáo](/images/3-Blogs/Blog-1/image-2.png)
 <span class="meta-info">*Hình 2 — Tổng quan quy trình hoạt động*</span>
 
 * **Phát hiện sự kiện (Event Detection):** Khi cụm Amazon Redshift nhận một bản vá hoặc sửa đổi, [thông báo sự kiện](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html) sẽ được kích hoạt. Các quy tắc trong [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html) sẽ tự động bắt các sự kiện này.

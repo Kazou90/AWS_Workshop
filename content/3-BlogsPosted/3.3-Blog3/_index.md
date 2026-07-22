@@ -19,7 +19,7 @@ This post details how to leverage Amazon Web Services (AWS) serverless services 
 
 The solution uses Amazon API Gateway, AWS Lambda, and Amazon Kinesis Data Streams to ingest and process clickstream data. It then uses Amazon Kinesis Data Firehose to save the raw data in Amazon S3, followed by Amazon Athena and Amazon QuickSight to analyze and visualize user interactions.
 
-![Clickstream Architecture Diagram](images/3-Blogs/Blog-3/image-1.png)
+![Clickstream Architecture Diagram](/images/3-Blogs/Blog-3/image-1.png)
 <span class="meta-info">*Figure 1 — Serverless Clickstream Data Flow Architecture*</span>
 
 1. **Ingestion:** The client (e.g., customer web portal) sends the clickstream payload (records of clicks, page views, duration, form submissions) to **Amazon API Gateway**.

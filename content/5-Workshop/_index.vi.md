@@ -7,7 +7,7 @@ pre: "<b>5. </b>"
 
 # Batch-Based Clickstream Analytics Platform
 
-![Architecture](images/architecture.png)
+![Architecture](/images/architecture.png)
 
 <p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
 

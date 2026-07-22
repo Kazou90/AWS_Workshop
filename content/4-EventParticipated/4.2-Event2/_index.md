@@ -67,3 +67,9 @@ pre: " <b> 4.2. </b> "
 
 5. **Attitude Over Aptitude at the Starting Line:**
    - Growth mindset, asking "Why?", resilience in failure, and lifelong learning are the most critical qualities employers evaluate in fresh graduates.
+
+---
+
+### Event Photos
+
+![Cloud Architect Meetup Event Photo](/images/event-2.jpg)

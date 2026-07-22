@@ -69,3 +69,9 @@ pre: " <b> 4.2. </b> "
 
 5. **Thái độ quan trọng hơn Trình độ ở vạch xuất phát:**
    - Ở giai đoạn đầu, thái độ cầu thị, sự chủ động hỏi "Tại sao?", tính kiên định (Resilience) khi gặp thất bại và tinh thần học tập suốt đời (Lifelong learning) là những yếu tố quan trọng nhất để nhà tuyển dụng đánh giá cao bạn.
+
+---
+
+### Hình Ảnh Sự Kiện
+
+![Hình ảnh tham gia sự kiện Cloud Architect Meetup](/images/event-2.jpg)

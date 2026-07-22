@@ -7,9 +7,20 @@ pre: " <b> 5.7. </b> "
 
 ## 5.7 Demo
 
-## Workshop Recording 🔗
+### Video Ghi Hình Workshop 🔗
+
+Xem lại toàn bộ buổi thuyết trình và phần trình diễn thực hành workshop bên dưới:
+
+{{< youtube j8ZJqfsTYlw >}}
+
+* **Đường dẫn trực tiếp:** [Xem trên YouTube](https://www.youtube.com/watch?v=j8ZJqfsTYlw)
 
 ---
 
-## Live Application
+### Trải Nghiệm Ứng Dụng Thực Tế 🌐
+
+Truy cập hệ thống Clickstream E-Commerce đang hoạt động thực tế:
+
+* **Trang web:** [http://hocvien.online/](http://hocvien.online/)
+
 

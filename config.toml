@@ -1,4 +1,4 @@
-baseURL = "https://workshop-sample.awsfcaj.com/"
+baseURL = "https://kazou90.github.io/AWS_Workshop/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"

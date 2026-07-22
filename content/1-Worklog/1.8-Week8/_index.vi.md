@@ -1,59 +1,25 @@
 ---
 title: "Worklog Tuần 8"
-date: 2024-01-01
-weight: 1
+date: "2026-06-08"
+weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 8:
+- Cấu hình **Amazon Cognito User Pool** để xử lý toàn bộ luồng đăng ký, đăng nhập bảo mật và xác thực mã OTP gửi về Email/SMS cho người dùng mua sắm.
+- Đóng gói ứng dụng **Frontend React Vite**, tải lên **Amazon S3 Bucket** và thiết lập phân phối qua **Amazon CloudFront CDN** với HTTPS mã hóa.
 
-### Mục tiêu tuần 8:
+### Các công việc triển khai trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 1 (Thứ 2) | **Cấu hình Cognito User Pool & OTP Trigger:** Thiết lập quy tắc đăng ký người dùng trong Cognito User Pool, cấu hình dịch vụ gửi mã OTP xác thực qua Email (SES/Cognito Default). | 08/06/2026 | 08/06/2026 | <https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html> |
+| 2 (Thứ 3) | **Tích hợp Auth SDK vào React Frontend:** Tích hợp thư viện AWS Amplify / Cognito SDK vào React Vite, viết giao diện Form Đăng ký, Nhập mã OTP và Đăng nhập nhận JWT Tokens. | 09/06/2026 | 09/06/2026 | AWS Amplify Auth Docs |
+| 3 (Thứ 4) | **Build ứng dụng Frontend React Vite:** Đóng gói ứng dụng React Vite sang bộ tệp tĩnh tối ưu (`dist/` folder chứa HTML, JS bundle, CSS) bằng lệnh `npm run build`. | 10/06/2026 | 10/06/2026 | Vite Build Guide |
+| 4 (Thứ 5) | **Deploy Frontend lên S3 Bucket:** Tải toàn bộ thư mục `dist/` lên S3 Bucket, cấu hình S3 Static Website Hosting và Bucket Policy cho phép CloudFront đọc dữ liệu. | 11/06/2026 | 11/06/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html> |
+| 5 (Thứ 6) | **Cấu hình CloudFront CDN & Single Page App Routing:** Tạo CloudFront Distribution trỏ về S3 Bucket, cấu hình Custom Error Responses (chuyển hướng lỗi 403/404 về `index.html` cho React Router). | 12/06/2026 | 12/06/2026 | <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultPages.html> |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 8:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Kết quả đạt được Tuần 8:
+* **Xác thực Tài khoản Bảo mật qua OTP:** Xây dựng hoàn chỉnh luồng đăng ký/đăng nhập khách hàng tích hợp mã xác thực OTP qua Amazon Cognito.
+* **Triển khai Frontend Toàn cầu với CloudFront:** Deploy giao diện mua sắm React Vite lên S3 và CloudFront, giúp tốc độ tải trang phản hồi tức thì và hỗ trợ HTTPS chuẩn bảo mật.

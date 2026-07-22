@@ -1,57 +1,25 @@
 ---
 title: "Week 8 Worklog"
-date: 2024-01-01
-weight: 1
+date: "2026-06-08"
+weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 8 Objectives:
-
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Configure **Amazon Cognito User Pools** to handle user registration, secure login, and email/SMS OTP verification workflows.
+- Package **React Vite Frontend** applications, uploading build artifacts to **Amazon S3** and distributing endpoints globally via **Amazon CloudFront CDN** with HTTPS encryption.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference/Material |
+| --- | --- | --- | --- | --- |
+| 1 (Mon) | **Configure Cognito User Pool & OTP Triggers:** Set up user signup verification policies in Cognito User Pools, configuring automated OTP delivery via Email. | 08/06/2026 | 08/06/2026 | <https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html> |
+| 2 (Tue) | **Integrate Auth SDK into React Frontend:** Integrate AWS Amplify / Cognito Auth SDK into React Vite, implementing Signup forms, OTP Verification dialogs, and JWT token storage. | 09/06/2026 | 09/06/2026 | AWS Amplify Auth Docs |
+| 3 (Wed) | **Build React Vite Frontend Assets:** Bundle the React Vite application into optimized static assets (`dist/` folder containing HTML, JS bundles, CSS) using `npm run build`. | 10/06/2026 | 10/06/2026 | Vite Build Guide |
+| 4 (Thu) | **Deploy Frontend to S3 Bucket:** Upload built static assets to the S3 bucket, configuring Static Website Hosting properties and CloudFront read access policies. | 11/06/2026 | 11/06/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html> |
+| 5 (Fri) | **CloudFront CDN & Single Page App Routing:** Create CloudFront Distributions targeting S3 origins, configuring Custom Error Responses (redirecting HTTP 403/404 errors to `index.html` for client routing). | 12/06/2026 | 12/06/2026 | <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultPages.html> |
 
 ### Week 8 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Secure User Authentication via OTP:** Built a complete user onboarding and login experience backed by Amazon Cognito OTP verification.
+* **Global Frontend Deployment via CloudFront:** Deployed React Vite E-Commerce frontend builds onto S3 and CloudFront, delivering lightning-fast page loading over encrypted HTTPS connections.

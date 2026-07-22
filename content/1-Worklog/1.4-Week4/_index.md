@@ -1,57 +1,28 @@
 ---
 title: "Week 4 Worklog"
-date: 2024-01-01
-weight: 1
+date: "2026-05-11"
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 4 Objectives:
-
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Provision, configure, and secure relational databases using **Amazon RDS** (PostgreSQL/MySQL) in Multi-AZ deployment mode.
+* Understand NoSQL architecture and master **Amazon DynamoDB** (Partition Key, Sort Key, Global Secondary Indexes - GSI, DynamoDB Streams).
+* Establish secure database connectivity from backend applications (Spring Boot / Node.js) inside private VPC subnets.
+* Practice database backup and point-in-time recovery (PITR) mechanisms on AWS.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference/Material |
+| --- | --- | --- | --- | --- |
+| 1 (Mon) | **Lab 08 – Amazon RDS Multi-AZ Deployment:** Launch Multi-AZ RDS PostgreSQL/MySQL clusters, configure private DB Subnet Groups, Parameter Groups, and restrict access via DB Security Groups. | 11/05/2026 | 11/05/2026 | <https://000008.awsstudygroup.com/> |
+| 2 (Tue) | **Database Backup & Recovery:** Perform manual DB Snapshots, test Point-in-Time Recovery (PITR), and execute schema migration scripts using `psql` / `mysql-client`. | 12/05/2026 | 12/05/2026 | <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.BackupRestore.html> |
+| 3 (Wed) | **Lab 09 – Data Modeling with Amazon DynamoDB:** Create NoSQL tables with Partition Keys and Sort Keys. Configure Global Secondary Indexes (GSIs) to accelerate multi-attribute queries. | 13/05/2026 | 13/05/2026 | <https://000009.awsstudygroup.com/> |
+| 4 (Thu) | **Advanced DynamoDB Features (TTL & Streams):** Configure Time To Live (TTL) for automatic item expiration and enable DynamoDB Streams to track real-time data modifications. | 14/05/2026 | 14/05/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html> |
+| 5 (Fri) | **Backend Database Integration:** Configure Spring Boot (Spring Data JPA) and Node.js (AWS SDK v3) applications to connect securely to private RDS and DynamoDB endpoints. | 15/05/2026 | 15/05/2026 | <https://aws.amazon.com/developer/language/java/> |
 
 ### Week 4 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Relational Database Administration:** Successfully deployed Multi-AZ RDS clusters with automated failover capabilities, ensuring 99.99% data availability.
+* **NoSQL Data Modeling:** Designed efficient DynamoDB schemas with GSIs, optimizing read/write capacity and leveraging TTL to automate data cleanup.
+* **Secure Database Connectivity:** Hardened database network access by hosting instances exclusively in private subnets, restricting connections to authorized backend application security groups.

@@ -1,57 +1,27 @@
 ---
 title: "Week 11 Worklog"
-date: 2024-01-01
-weight: 2
+date: "2026-06-29"
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 11 Objectives:
-
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Test the **Analytics Dashboard** page, ensuring interactive chart components (**Chart.js**) render metric insights accurately from CSV report files downloaded via Amazon S3.
+- Audit overall system security: Review **IAM Roles**, enforcing the Principle of Least Privilege for Lambda S3 bucket access.
+- Execute cloud resource **Clean-up** procedures to purge unused components and optimize AWS operational costs.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference/Material |
+| --- | --- | --- | --- | --- |
+| 1 (Mon) | **Analytics Dashboard Testing:** Verify S3 CSV file fetching flows and inspect Chart.js visualization components (Hourly Clickstream Charts, Revenue Performance Graphs). | 29/06/2026 | 29/06/2026 | Chart.js Documentation |
+| 2 (Tue) | **Data Reconciliation Verification:** Cross-check data points rendered on Chart.js graphs against raw S3 CSV file contents and RDS MySQL database records. | 30/06/2026 | 30/06/2026 | Data Verification Test |
+| 3 (Wed) | **IAM Security Audit:** Audit all active IAM Roles, scoping `s3:GetObject` and `s3:PutObject` policies strictly to designated S3 Bucket ARNs. | 01/07/2026 | 01/07/2026 | <https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html> |
+| 4 (Thu) | **Idle Resource Audit & Cost Clean-up:** Release unattached Elastic IPs, prune obsolete EBS Snapshots, and clean up temporary staging S3 buckets. | 02/07/2026 | 02/07/2026 | AWS Cost Optimization |
+| 5 (Fri) | **Monthly Cloud Expenditure Review:** Review AWS Cost Explorer usage reports, confirming that total resource spend remains strictly within budget targets. | 03/07/2026 | 03/07/2026 | AWS Cost Explorer |
 
 ### Week 11 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Interactive Analytics Dashboard Integration:** Rendered Clickstream user trends and sales metrics seamlessly using Chart.js powered by S3 CSV data lakes.
+* **Hardened IAM Access Control:** Standardized IAM Policies across Lambda and EC2 under Least Privilege rules, mitigating privilege escalation risks.
+* **Cloud Cost Optimization:** Pruned 100% of unused staging assets, maintaining an optimized monthly AWS cloud budget.

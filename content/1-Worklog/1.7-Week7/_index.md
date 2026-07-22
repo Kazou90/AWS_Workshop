@@ -1,57 +1,27 @@
 ---
 title: "Week 7 Worklog"
-date: 2024-01-01
-weight: 1
+date: "2026-06-01"
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 7 Objectives:
-
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Provision **RDS MySQL** instances, performing data migration of product catalogs and order history from local to the Cloud.
+- Package **Spring Boot Backend** applications (`.jar`), install Java OpenJDK environments, and operate services on **Amazon EC2**.
+- Configure **Security Group** firewall rules to enforce 100% secure inter-service communication between EC2 Backends and RDS Databases.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference/Material |
+| --- | --- | --- | --- | --- |
+| 1 (Mon) | **Provision RDS MySQL Database:** Create RDS MySQL instances in private subnets, configuring DB Subnet Groups and initializing `ecommerce_db` schemas. | 01/06/2026 | 01/06/2026 | <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html> |
+| 2 (Tue) | **Product & Order Data Migration:** Execute SQL migration scripts to convert table schemas and import product catalogs, categories, and order samples onto RDS MySQL. | 02/06/2026 | 02/06/2026 | MySQL Workbench Migration |
+| 3 (Wed) | **Package Spring Boot Application:** Update `application-prod.properties` to reference RDS JDBC Endpoints, building production `app.jar` artifacts. | 03/06/2026 | 03/06/2026 | Spring Boot Maven Build |
+| 4 (Thu) | **Configure EC2 Environment & Deploy Backend:** SSH into EC2 instances, install Java OpenJDK 17, transfer `app.jar`, and run the application as a background systemd service. | 04/06/2026 | 04/06/2026 | EC2 Deployment Guide |
+| 5 (Fri) | **Inter-Service Security Group Hardening:** Configure DB Security Group Inbound rules allowing port 3306 exclusively from EC2 Security Group IDs, verifying REST API responses. | 05/06/2026 | 05/06/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html> |
 
 ### Week 7 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Successful Cloud Database Migration:** Migrated all product catalog and order records seamlessly from local environments to production RDS MySQL instances.
+* **Spring Boot Backend Execution on EC2:** Deployed and operated Spring Boot APIs reliably on Amazon EC2 as persistent background services.
+* **Inter-Service Security Hardening:** Established direct Security Group references between EC2 and RDS, isolating database instances completely from public Internet exposure.

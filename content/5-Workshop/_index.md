@@ -1,31 +1,91 @@
 ---
 title: "Workshop"
-date: 2024-01-01
 weight: 5
 chapter: false
-pre: " <b> 5. </b> "
+pre: "<b>5. </b>"
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Batch-Based Clickstream Analytics Platform
+
+![Architecture](/images/architecture.png)
+<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+This workshop walks through the deployment of a **Batch-Based Clickstream Analytics Platform** built for an e-commerce website selling computer products.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+The platform captures clickstream events emitted by the frontend, persists the raw JSON payloads in **Amazon S3**, runs scheduled ETL jobs (**AWS Lambda + EventBridge**), and loads the transformed records into a dedicated **PostgreSQL Data Warehouse on EC2** inside a private subnet.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+Analytics dashboards are powered by **R Shiny**, deployed on the same EC2 instance as the Data Warehouse, and accessed securely via **AWS Systems Manager Session Manager**.
 
-#### Content
+The platform is designed around the following principles:
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+- A strict boundary between **OLTP and Analytics** workloads  
+- A fully private analytical backend (**no public-facing DW access**)  
+- Serverless AWS components to maximize cost-efficiency and scalability  
+- Zero-SSH admin access: all management is handled through **SSM Session Manager** into the private DW / Shiny EC2  
+- The Shiny app is accessible locally at **localhost:3838**
+
+#### Key Architecture Components
+
+**Frontend & OLTP Domain**
+
+- Next.js app: **`ClickSteam.NextJS`** hosted on **AWS Amplify Hosting**  
+- **Amazon CloudFront** as global CDN  
+- **Amazon Cognito** User Pool for authentication  
+- OLTP PostgreSQL on EC2: **`SBW_EC2_WebDB`** (public subnet)  
+  - DB: `clickstream_web` (schema `public`)  
+  - Port: `5432`  
+
+**Ingestion & Data Lake Domain**
+
+- **Amazon API Gateway (HTTP API)**: `clickstream-http-api`  
+  - Route: `POST /clickstream`  
+- **Lambda Ingest**: `clickstream-lambda-ingest`  
+  - Validates payload, enriches metadata, writes JSON files to S3  
+- **S3 Raw Clickstream Bucket**: `clickstream-s3-ingest`  
+  - Prefix: `events/YYYY/MM/DD/`  
+  - File pattern: `event-<uuid>.json`  
+  - `RAW_BUCKET = clickstream-s3-ingest`  
+
+**Analytics & Data Warehouse Domain**
+
+- **Private EC2 for DWH + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
+  - DWH DB: `clickstream_dw` 
+  - Main table: `clickstream_events` with fields:
+    - `event_id, event_timestamp, event_name`  
+    - `user_id, user_login_state, identity_source, client_id, session_id, is_first_visit`  
+    - `context_product_id, context_product_name, context_product_category, context_product_brand`  
+    - `context_product_price, context_product_discount_price, context_product_url_path`  
+  - R Shiny Server on port `3838`, web path `/sbw_dashboard`  
+
+- **Lambda ETL**: `SBW_Lamda_ETL` (VPC-enabled)  
+  - Reads raw JSON from `clickstream-s3-ingest`  
+  - Transforms into SQL-ready rows  
+  - Inserts into `clickstream_dw.public.clickstream_events`  
+
+- **EventBridge Rule**: `SBW_ETL_HOURLY_RULE`  
+  - Schedule: `rate(1 hour)`  
+
+- **VPC & Networking**
+
+  - VPC CIDR: `10.0.0.0/16`  
+  - Public subnet: `10.0.0.0/20` → `SBW_Project-subnet-public1-ap-southeast-1a` (OLTP EC2)  
+  - Private subnet: `10.0.128.0/20` → `SBW_Project-subnet-private1-ap-southeast-1a` (DW, Shiny, ETL Lambda)  
+  - **S3 Gateway VPC Endpoint** for private S3 access  
+  - **SSM Interface Endpoints** (SSM, SSMMessages, EC2Messages) for Session Manager  
+
+- **Admin Access (SSM)**  
+  - Port forwarding:
+    - `localPort = 3838`  
+    - `portNumber = 3838`  
+  - Shiny URL from local: `http://localhost:3838/sbw_dashboard`  
+
+#### Content Map
+
+1. **[5.1. Objectives & Scope](5.1-objectives--scope/)**  
+2. **[5.2. Architecture Walkthrough](5.2-architecture-walkthrough/)**  
+3. **[5.3. Implementing Clickstream Ingestion](5.3-implementing-clickstream-ingestion/)**  
+4. **[5.4. Building the Private Analytics Layer](5.4-building-private-analytics-layer/)**  
+5. **[5.5. Visualizing Analytics with Shiny Dashboards](5.5-visualizing-analytics-with-shiny-dashboards/)**  
+6. **[5.6. Summary & Clean up](5.6-summary-cleanup/)**

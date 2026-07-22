@@ -1,58 +1,27 @@
 ---
 title: "Worklog Tuần 12"
-date: 2024-01-01
-weight: 2
+date: "2026-07-06"
+weight: 12
 chapter: false
-pre: " <b> 1.12 </b> "
+pre: " <b> 1.12. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-### Mục tiêu tuần 12:
+### Mục tiêu Tuần 12:
+- Xây dựng trang **Hugo Workshop** và hoàn thiện trang **Worklog** chi tiết dựa trên bộ mẫu chuẩn GitHub repository của AWS Study Group.
+- Tổng hợp đầy đủ nhật ký công việc, hoàn thiện nội dung cuốn **Báo cáo Thực tập Tốt nghiệp** và gửi Cán bộ hướng dẫn đánh giá, chấm điểm.
+- Thực hiện kiểm tra cuối cùng toàn bộ tài nguyên AWS Cloud, tiến hành nghiệm thu dự án và hoàn tất thủ tục bàn giao.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc triển khai trong tuần:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 1 (Thứ 2) | **Xây dựng Hugo Workshop & Worklog:** Soạn thảo nội dung các trang bài học Workshop và hoàn thiện 12 tuần Worklog chuẩn định dạng Hugo Markdown theo mẫu GitHub repository. | 06/07/2026 | 06/07/2026 | <https://github.com/AWS-First-Cloud-Journey/> |
+| 2 (Thứ 3) | **Tổng hợp Báo cáo Thực tập Tốt nghiệp:** Tập hợp kết quả triển khai dự án, hình ảnh kiến trúc hạ tầng AWS và tổng hợp Worklog vào cuốn Báo cáo Thực tập chính thức. | 07/07/2026 | 07/07/2026 | Biểu mẫu Báo cáo HUTECH |
+| 3 (Thứ 4) | **Gửi Báo cáo & Xin Nhận xét Doanh nghiệp:** Nộp báo cáo thực tập cho Cán bộ hướng dẫn tại Amazon Web Services Việt Nam để xin nhận xét, đánh giá và xác nhận hoàn thành thực tập. | 08/07/2026 | 08/07/2026 | Quy định Thực tập Doanh nghiệp |
+| 4 (Thứ 5) | **Kiểm tra Cuối cùng Tài nguyên AWS Cloud:** Rà soát lại toàn bộ trạng thái tài nguyên đang chạy trên AWS Console (EC2, RDS, S3, CloudFront), đảm bảo an toàn bảo mật 100%. | 09/07/2026 | 09/07/2026 | AWS Management Console |
+| 5 (Thứ 6) | **Nghiệm thu Dự án & Hoàn thành Thực tập:** Nghiệm thu dự án với Cán bộ hướng dẫn, hoàn tất bàn giao mã nguồn và kết thúc xuất sắc kỳ thực tập tốt nghiệp. | 10/07/2026 | 10/07/2026 | Biên bản Nghiệm thu |
 
-
-### Kết quả đạt được tuần 12:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Kết quả đạt được Tuần 12:
+* **Hoàn thiện Website Hugo Workshop & Worklog:** Đã xây dựng hoàn chỉnh trang web báo cáo thực tập trên Hugo với đầy đủ 12 tuần nhật ký công việc chi tiết.
+* **Hoàn thành Báo cáo Thực tập Tốt nghiệp:** Được Cán bộ doanh nghiệp tại AWS Việt Nam đánh giá cao và ký xác nhận báo cáo thực tập tốt nghiệp.
+* **Nghiệm thu Dự án Xuất sắc:** Bảo vệ và nghiệm thu thành công dự án ứng dụng Thương mại điện tử kết hợp Phân tích dữ liệu Clickstream trên nền tảng AWS Cloud.

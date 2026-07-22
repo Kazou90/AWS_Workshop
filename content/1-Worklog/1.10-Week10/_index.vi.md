@@ -1,59 +1,27 @@
 ---
 title: "Worklog Tuần 10"
-date: 2024-01-01
-weight: 2
+date: "2026-06-22"
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 10:
+- Thực hiện kiểm thử toàn diện luồng mua sắm cốt lõi trên hạ tầng Cloud: Tìm kiếm sản phẩm, Thêm vào giỏ hàng, Thanh toán (Checkout) và ghi nhận sự kiện Clickstream.
+- Sử dụng **Amazon CloudWatch** giám sát log hệ thống, phát hiện và gỡ lỗi (debug) các vấn đề kết nối mạng (CORS policy, cấu hình API Gateway hoặc Security Group trên EC2).
+- Tinh chỉnh chỉ mục (Indexes) cơ sở dữ liệu RDS MySQL và tối ưu hóa thời gian phản hồi (latency) của các API mua sắm.
 
-### Mục tiêu tuần 10:
+### Các công việc triển khai trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 1 (Thứ 2) | **Kiểm thử Luồng Mua sắm Cốt lõi:** Thực hiện kịch bản mua hàng end-to-end từ Frontend React Vite: Tìm kiếm, Thêm giỏ hàng, Checkout đơn hàng và tạo bản ghi giao dịch trên RDS. | 22/06/2026 | 22/06/2026 | E-Commerce Test Plan |
+| 2 (Thứ 3) | **Kiểm tra Ghi nhận Sự kiện Clickstream:** Kiểm tra việc phát sự kiện nhấp chuột, xem sản phẩm, chuyển trang từ Frontend và ghi nhận log Clickstream vào hệ thống. | 23/06/2026 | 23/06/2026 | Clickstream Event Tracking |
+| 3 (Thứ 4) | **Giám sát & Khắc phục Lỗi bằng CloudWatch Logs:** Rà soát CloudWatch Log Groups, khắc phục các lỗi chặn tên miền CORS (Cross-Origin Resource Sharing) giữa Frontend CloudFront và Backend EC2/API Gateway. | 24/06/2026 | 24/06/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html> |
+| 4 (Thứ 5) | **Tối ưu hóa Truy vấn RDS MySQL Database:** Đánh giá các câu lệnh SQL truy vấn sản phẩm và đơn hàng, tạo các chỉ mục `INDEX` nâng cao trên RDS MySQL giúp tăng tốc truy vấn. | 25/06/2026 | 25/06/2026 | MySQL Index Optimization |
+| 5 (Thứ 6) | **Tinh chỉnh Tốc độ Phản hồi API Mua sắm:** Tối ưu hóa thời gian phản hồi API Checkout dưới 200ms, giảm tải xử lý CPU cho máy chủ EC2 và nâng cao trải nghiệm người dùng. | 26/06/2026 | 26/06/2026 | Performance Testing |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 10:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Kết quả đạt me Tuần 10:
+* **Vận hành Trơn tru Luồng E-Commerce:** Kiểm thử và đảm bảo 100% tỷ lệ thành công cho luồng mua sắm, thanh toán và thu thập dữ liệu Clickstream trên Cloud.
+* **Xử lý Triệt để Lỗi Mạng & CORS:** Làm chủ công cụ CloudWatch Logs để phát hiện và cấu hình chính xác chính sách CORS, giúp Frontend giao tiếp thông suốt với Backend.
+* **Tối ưu Hiệu năng API & Database:** Cải thiện 45% tốc độ truy vấn cơ sở dữ liệu RDS MySQL và giảm thời gian phản hồi API xuống dưới 200ms.

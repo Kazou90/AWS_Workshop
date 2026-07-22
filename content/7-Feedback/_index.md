@@ -1,21 +1,14 @@
 ---
 title: "Sharing and Feedback"
-date: 2024-01-01
 weight: 7
 chapter: false
 pre: " <b> 7. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
-> Here, you can freely share your personal opinions about your experience participating in the First Cloud AI Journey program. This will help the FCAJ team improve any shortcomings based on the following aspects:
-
 ### Overall Evaluation
 
 **1. Working Environment**  
-The working environment is very friendly and open. FCAJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.
+The working environment is very friendly and open. FCJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.
 
 **2. Support from Mentor / Team Admin**  
 The mentor provides very detailed guidance, explains clearly when I don’t understand, and always encourages me to ask questions. The admin team supports administrative tasks, provides necessary documents, and creates favorable conditions for me to work effectively. I especially appreciate that the mentor allows me to try and solve problems myself instead of just giving the answer.
@@ -35,13 +28,20 @@ The company provides an internship allowance and offers flexible working hours w
 ---
 
 ### Additional Questions
-- What did you find **most satisfying** during your internship?  
-- What do you think the company **should improve** for future interns?  
-- If recommending to a friend, would you **suggest they intern here**? Why or why not?  
+
+- What did you find **most satisfying** during your internship?
+  - During my internship, what I liked most was understanding what it’s like to work in real companies. Even though I didn’t get to work exactly like in a real job, it still gave me the feeling of having a fixed work schedule like an office environment.
+- What do you think the company **should improve** for future interns?
+  - What I think the company should improve is the working process. The training program has quite a large number of people, so it’s difficult to manage everyone. Some people are active while others are not. So it would be better to assign tasks to interns, so they really feel like they are learning through working. Besides doing personal projects, the assigned tasks should match their skill level and suit the project they are working on, helping them generate ideas.
+- If recommending to a friend, would you **suggest they intern here**? Why or why not?
+  - If I were to introduce it to my friends, I would encourage them to participate if they have the opportunity to try it. The environment may be crowded and it might be difficult to stay motivated or take initiative, but they will gain new knowledge and learn important things that are valuable across many industries, not only in technology.
 
 ---
 
 ### Suggestions & Expectations
-- Do you have any suggestions to improve the internship experience?  
-- Would you like to continue this program in the future?  
-- Any other comments (free sharing):
+
+- Do you have any suggestions to improve the internship experience?
+  - Overall, there isn’t much that needs improvement—the program is already very good. The only thing needed is better management of FCJ members, and everything will be smooth.
+- Would you like to continue this program in the future?
+  - In the future, I will join again to have more opportunities to connect with others and find new opportunities for myself, helping me grow and improve my perspective and working mindset.
+- Any other comments (free sharing): I don’t have any additional comments.

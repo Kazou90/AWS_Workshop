@@ -1,59 +1,25 @@
 ---
 title: "Worklog Tuần 3"
-date: 2024-01-01
-weight: 1
+date: "2026-05-04"
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 3:
+- Khởi tạo, cấu hình và vận hành cơ sở dữ liệu quan hệ **Amazon RDS (MySQL)**, kiểm tra kết nối mạng từ máy ảo EC2.
+- Nghiên cứu mạng lưới phân phối nội dung **Amazon CloudFront CDN**, kết hợp CloudFront với Amazon S3 Origin để tối ưu hóa tốc độ tải trang web và áp dụng SSL/TLS.
 
-### Mục tiêu tuần 3:
+### Các công việc triển khai trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 1 (Thứ 2) | **Khởi tạo Amazon RDS MySQL Database:** Khởi tạo instance RDS MySQL (phân hạng Free Tier), cấu hình DB Subnet Group, thiết lập master username/password và đặt tên database ban đầu. | 04/05/2026 | 04/05/2026 | <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html> |
+| 2 (Thứ 3) | **Cấu hình Tường lửa DB & Kiểm tra Kết nối:** Tạo DB Security Group mở port 3306 chỉ cho phép IP của máy ảo EC2. Thực hành cài đặt `mysql-client` trên EC2 và truy vấn thử nghiệm thành công. | 05/05/2026 | 05/05/2026 | <https://000008.awsstudygroup.com/> |
+| 3 (Thứ 4) | **Nghiên cứu Amazon CloudFront CDN:** Tìm hiểu cơ chế caching tại các Edge Location, Origin Server, CNAMEs và chứng chỉ SSL/TLS khi tích hợp CDN với S3 Bucket. | 06/05/2026 | 06/05/2026 | <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html> |
+| 4 (Thứ 5) | **Cấu hình CloudFront Distribution với S3 Origin:** Tạo CloudFront Distribution trỏ đến S3 Website Bucket, thiết lập Origin Access Control (OAC) để bảo vệ S3 origin và bật mã hóa HTTPS. | 07/05/2026 | 07/05/2026 | <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html> |
+| 5 (Thứ 6) | **Đánh giá Hiệu năng & Tối ưu Caching:** Đo đạc tốc độ tải trang trước và sau khi qua CloudFront Edge Locations (giảm độ trễ truy cập đến 70%), cấu hình Cache Behaviors và TTL cho file static. | 08/05/2026 | 08/05/2026 | AWS CloudFront Best Practices |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 3:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Kết quả đạt được Tuần 3:
+* **Vận hành Relational Database trên Cloud:** Khởi tạo thành công database RDS MySQL, kiểm soát phân quyền kết nối qua Security Group chỉ cho phép giao tiếp nội bộ từ EC2.
+* **Tăng tốc Truy cập Mạng Toàn cầu với CloudFront:** Tích hợp thành công CloudFront CDN phía trước S3 Bucket, giúp tối ưu hóa tốc độ tải trang web, bảo mật dữ liệu gốc qua OAC và hỗ trợ HTTPS mặc định.

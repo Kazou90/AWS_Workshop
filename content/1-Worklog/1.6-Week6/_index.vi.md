@@ -1,58 +1,27 @@
 ---
 title: "Worklog Tuần 6"
-date: 2024-01-01
-weight: 1
+date: "2026-05-25"
+weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 6:
+- Đánh giá toàn bộ cấu trúc mã nguồn hiện tại của dự án Thương mại điện tử (Frontend React Vite, Backend Spring Boot và luồng dữ liệu Clickstream).
+- Lập kế hoạch chuyển đổi hệ thống sang Cloud: Thay thế cơ sở dữ liệu tạm H2 bằng **RDS MySQL**, cấu hình lưu trữ file CSV và dữ liệu thô trên **Amazon S3**.
+- Thiết kế sơ đồ kiến trúc hạ tầng AWS tổng thể kết nối đồng bộ các dịch vụ: EC2, RDS MySQL, S3, CloudFront, Cognito và EventBridge.
 
-### Mục tiêu tuần 6:
+### Các công việc triển khai trong tuần:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 1 (Thứ 2) | **Đánh giá Mã nguồn Frontend & Backend:** Review cấu trúc thư mục dự án React Vite (UI mua sắm), Spring Boot Backend (REST API) và phân tích định dạng dữ liệu Clickstream (User Session, Click events). | 25/05/2026 | 25/05/2026 | Source Code Repository |
+| 2 (Thứ 3) | **Kế hoạch Chuyển đổi Database sang RDS MySQL:** Phân tích cấu hình `application.properties` của Spring Boot, chuẩn bị driver kết nối MySQL và kịch bản chuyển đổi schema từ H2 sang RDS. | 26/05/2026 | 26/05/2026 | Spring Data JPA Docs |
+| 3 (Thứ 4) | **Kế hoạch Lưu trữ File CSV trên Amazon S3:** Thiết kế cấu trúc thư mục lưu trữ file CSV báo cáo trên S3 (`s3://my-bucket/raw-clickstream/`), cấu hình S3 SDK client cho Spring Boot. | 27/05/2026 | 27/05/2026 | AWS SDK for Java |
+| 4 (Thứ 5) | **Vẽ Sơ đồ Kiến trúc Hạ tầng AWS:** Thiết kế sơ đồ kiến trúc đám mây toàn vẹn kết nối các dịch vụ EC2 (Backend), RDS MySQL (Database), S3 (Static Web & Data Lake), CloudFront (CDN), Cognito (Auth) và EventBridge/Lambda (ETL). | 28/05/2026 | 28/05/2026 | AWS Architecture Center |
+| 5 (Thứ 6) | **Review Kiến trúc với Mentor:** Trình bày bản vẽ sơ đồ kiến trúc với Cán bộ hướng dẫn, nhận góp ý tối ưu hóa luồng mạng và quy hoạch IP/Subnet trong VPC. | 29/05/2026 | 29/05/2026 | Architecture Review |
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 6:
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+### Kết quả đạt được Tuần 6:
+* **Đánh giá Chi tiết Dự án:** Nắm vững cấu trúc mã nguồn dự án E-Commerce và định dạng dữ liệu Clickstream cần xử lý.
+* **Chiến lược Chuyển đổi Cloud Rõ ràng:** Lập kế hoạch thành công chuyển đổi DB từ H2 local sang RDS MySQL và đưa toàn bộ file lưu trữ lên S3 Bucket.
+* **Hoàn thiện Sơ đồ Kiến trúc AWS:** Thiết kế bản vẽ kiến trúc Cloud hoàn chỉnh đạt tiêu chuẩn AWS Well-Architected Framework, làm kim chỉ nam cho giai đoạn triển khai thực tế.

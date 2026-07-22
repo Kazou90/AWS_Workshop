@@ -8,7 +8,7 @@ pre: " <b> 4. </b> "
 
 During my internship, I participated in two events. Each one was a memorable experience that provided new, interesting, and useful knowledge, along with gifts and wonderful moments.
 
-### [Event 1](4.1-Event1/)  
+### [Event 1](4.1-event1/)  
 &emsp;**Event Name:** Kick Off AWS First Cloud AI Journey  
 
 &emsp;**Date & Time:** 09:00, April 17, 2026  
@@ -19,7 +19,7 @@ During my internship, I participated in two events. Each one was a memorable exp
 
 ---
 
-### [Event 2](4.2-Event2/)  
+### [Event 2](4.2-event2/)  
 &emsp;**Event Name:** Career Orientation & Cloud/Data Industry Sharing for Swinburne Vietnam Students  
 
 &emsp;**Date & Time:** 14:00, May 15, 2026  

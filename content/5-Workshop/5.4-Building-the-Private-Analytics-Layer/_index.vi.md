@@ -28,7 +28,7 @@ pre: " <b> 5.4. </b> "
 
 ## 5.4.2 VPC Endpoints (S3 & SSM)
 
-![Các VPC Endpoint cho S3 & SSM](/images/aws-vpc-endpoints-s3-ssm.png)
+![Các VPC Endpoint cho S3 & SSM](images/aws-vpc-endpoints-s3-ssm.png)
 
 ### S3 Gateway VPC Endpoint
 
@@ -110,7 +110,7 @@ ETL Lambda là nơi xử lý logic batch chính.
 
 ## 5.4.5 Lên lịch bằng EventBridge – `SBW_ETL_HOURLY_RULE`
 
-![EventBridge rule](/images/aws-eventbridge-sbw-etl-hourly-rule.png)
+![EventBridge rule](images/aws-eventbridge-sbw-etl-hourly-rule.png)
 
 EventBridge duy trì nền tảng hoạt động theo nhịp **batch**:
 

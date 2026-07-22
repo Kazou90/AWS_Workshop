@@ -41,7 +41,7 @@ Phân vùng theo giờ giúp batch ETL hiệu quả hơn (ví dụ: chỉ xử l
 
 ## 5.3.3 Thiết kế Lambda Ingest — `clickstream-lambda-ingest`
 
-![Lambda Ingest](/images/aws-lambda-clickstream-ingest-config.png)
+![Lambda Ingest](images/aws-lambda-clickstream-ingest-config.png)
 
 ### Nhiệm vụ
 
@@ -69,7 +69,7 @@ HTTP API cung cấp endpoint HTTPS public cho việc thu nhận sự kiện:
 - Route:
   - `POST /clickstream` → Lambda `clickstream-lambda-ingest`  
 
-![Route POST /clickstream](/images/aws-apigw-clickstream-routes.png)
+![Route POST /clickstream](images/aws-apigw-clickstream-routes.png)
 
 Cấu hình được khuyến nghị:
 

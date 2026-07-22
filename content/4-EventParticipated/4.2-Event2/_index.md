@@ -62,7 +62,7 @@ pre: " <b> 4.2. </b> "
    - Enterprises hire engineers to solve business problems. Technical skills without business domain context make engineers easily replaceable.
 
 4. **Success Formula:**
-   $$\text{Success} = \text{Capability} \times \text{Visibility} \times \text{Consistency}$$
+   - **Success = Capability × Visibility × Consistency**
    - Technical talent alone is insufficient if nobody knows your work. Share personal projects publicly on GitHub/Blogs and contribute to communities.
 
 5. **Attitude Over Aptitude at the Starting Line:**

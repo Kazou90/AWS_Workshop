@@ -64,7 +64,7 @@ pre: " <b> 4.2. </b> "
    - Doanh nghiệp cần lập trình viên giải quyết bài toán kinh doanh thực tế. Nếu chỉ giỏi kỹ thuật mà không hiểu logic vận hành của doanh nghiệp, bạn sẽ rất dễ bị thay thế.
 
 4. **Công thức thành công:**
-   $$\text{Thành công} = \text{Năng lực (Capability)} \times \text{Độ phủ sóng (Visibility)} \times \text{Sự kiên trì (Consistency)}$$
+   - **Thành công = Năng lực (Capability) × Độ phủ sóng (Visibility) × Sự kiên trì (Consistency)**
    - Giỏi kỹ thuật đến đâu mà không ai biết bạn là ai thì cũng không có cơ hội. Hãy chủ động công khai các dự án cá nhân lên GitHub/Blog và tham gia cộng đồng.
 
 5. **Thái độ quan trọng hơn Trình độ ở vạch xuất phát:**

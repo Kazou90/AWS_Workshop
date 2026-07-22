@@ -11,7 +11,7 @@ pre: " <b> 4.1. </b> "
 ### Mục Đích Của Sự Kiện
 
 - Định hình lộ trình nghiên cứu và thực hành điện toán đám mây bài bản cho các kỹ sư cũng như sinh viên trong cộng đồng.
--Cung cấp nền tảng kiến thức cốt lõi về hệ sinh thái AWS, bao gồm Hạ tầng toàn cầu (Global Infrastructure), Quản lý định danh (IAM) và các công cụ quản trị (Management Tools).
+- Cung cấp nền tảng kiến thức cốt lõi về hệ sinh thái AWS, bao gồm Hạ tầng toàn cầu (Global Infrastructure), Quản lý định danh (IAM) và các công cụ quản trị (Management Tools).
 
 ### Danh Sách Diễn Giả
 
@@ -64,6 +64,6 @@ pre: " <b> 4.1. </b> "
 ### Bài Học Rút Ra
 
 - Lĩnh vực Cloud và GenAI đang dịch chuyển với tốc độ chóng mặt. Việc đưa AI (như Kiro) vào quy trình phát triển không còn là một giải pháp tùy chọn, mà đã trở thành yếu tố then chốt để đột phá hiệu suất làm việc.
--Tinh thần đồng đội (Teamwork).
+- Tinh thần đồng đội (Teamwork).
 
 

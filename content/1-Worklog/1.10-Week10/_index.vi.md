@@ -21,7 +21,7 @@ pre: " <b> 1.10. </b> "
 | 4 (Thứ 5) | **Tối ưu hóa Truy vấn RDS MySQL Database:** Đánh giá các câu lệnh SQL truy vấn sản phẩm và đơn hàng, tạo các chỉ mục `INDEX` nâng cao trên RDS MySQL giúp tăng tốc truy vấn. | 25/06/2026 | 25/06/2026 | MySQL Index Optimization |
 | 5 (Thứ 6) | **Tinh chỉnh Tốc độ Phản hồi API Mua sắm:** Tối ưu hóa thời gian phản hồi API Checkout dưới 200ms, giảm tải xử lý CPU cho máy chủ EC2 và nâng cao trải nghiệm người dùng. | 26/06/2026 | 26/06/2026 | Performance Testing |
 
-### Kết quả đạt me Tuần 10:
+### Kết quả đạt được Tuần 10:
 * **Vận hành Trơn tru Luồng E-Commerce:** Kiểm thử và đảm bảo 100% tỷ lệ thành công cho luồng mua sắm, thanh toán và thu thập dữ liệu Clickstream trên Cloud.
 * **Xử lý Triệt để Lỗi Mạng & CORS:** Làm chủ công cụ CloudWatch Logs để phát hiện và cấu hình chính xác chính sách CORS, giúp Frontend giao tiếp thông suốt với Backend.
 * **Tối ưu Hiệu năng API & Database:** Cải thiện 45% tốc độ truy vấn cơ sở dữ liệu RDS MySQL và giảm thời gian phản hồi API xuống dưới 200ms.

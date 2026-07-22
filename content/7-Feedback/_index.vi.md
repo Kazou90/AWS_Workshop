@@ -14,7 +14,7 @@ Môi trường làm việc của FCJ rất hoạt bát, niềm nở. Có 1 môi 
 Mentor rất nhiệt tình trong việc hỗ trợ các thành viên FCJ, luôn giải đáp mọi thắc mắc của các thành viên trong FCJ. Luôn bên cạnh giúp các thành viên hoàn thành dự án, và cũng như các mentor tổ chức các buổi event để chia sẻ kinh nghiêm cho các mentor. Về mentor luôn rất nhiệt tình giúp đỡ các hành viên FCJ.
 
 **3. Sự phù hợp giữa công việc và chuyên ngành học**  
-Công việc được tự do lựa chọn sao cho phù hợp với chuyên ngành mình học, ngoài công việc ra khi đucợ làm việc với nhóm đucợ học thêm những kiến thức khác ngoài chuyên ngành và nó sẽ hỗ trọ cho việc phát triển bản thân. Được cơ hội tiếp cận nển tảng cloud là 1 kiến thức rất tuyệt vời và quan trọng.
+Công việc được tự do lựa chọn sao cho phù hợp với chuyên ngành mình học, ngoài công việc ra khi được làm việc với nhóm được học thêm những kiến thức khác ngoài chuyên ngành và nó sẽ hỗ trợ cho việc phát triển bản thân. Được cơ hội tiếp cận nền tảng cloud là 1 kiến thức rất tuyệt vời và quan trọng.
 
 **4. Cơ hội học hỏi & phát triển kỹ năng**  
 Học hỏi thì với môi trường mà FCJ tạo ra giúp mình học hỏi thêm nhiều kiến thức được tiếp cần các dịch vụ cloud của AWS, như là với mình học AI thì có AWS sagemaker cho việc huấn luyện mô hình AI. và các dịch vụ nổi tiếng mà các công ty thế giới hay dùng như RDS, S3, VPC...., và các dịch vụ khác. Trong quá trình học hỏi thì cũng như mình chưa hiểu và thắc mắc trong quá trình thực hành thì các mentor luôn sẵn lòng chia sẻ và chỉ dẫn cho mình.

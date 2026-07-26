@@ -1,15 +1,15 @@
 ---
-title: "Demo"
+title: "Demo & Video Recording"
 weight: 57
 chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-## 5.7 Demo
+## 5.7 Clickstream Analytics Platform Demo
 
-### Workshop Recording 🔗
+### 1. Recorded Demonstration Video 🔗
 
-Watch the complete workshop recording and live demonstration below:
+Watch the complete project presentation and live hands-on pipeline demonstration by Team **f5-SCAJ** below:
 
 {{< youtube j8ZJqfsTYlw >}}
 
@@ -17,10 +17,8 @@ Watch the complete workshop recording and live demonstration below:
 
 ---
 
-### Live Application 🌐
+### 2. Live Application Environment 🌐
 
-Access the live deployed Clickstream E-Commerce application:
+Access the live deployed Clickstream E-Commerce and Analytics application:
 
-* **Website URL:** [http://hocvien.online/](http://hocvien.online/)
-
-
+* **Live E-Commerce Website:** [http://hocvien.online/](http://hocvien.online/)

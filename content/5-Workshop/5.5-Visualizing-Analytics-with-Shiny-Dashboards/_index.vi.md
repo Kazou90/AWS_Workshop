@@ -1,254 +1,210 @@
 ---
-title: "Trực quan hóa phân tích với các bảng điều khiển Shiny"
+title: "Trực quan hóa Phân tích dữ liệu với R Shiny Dashboard"
 weight: 55
 chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-## 5.5.1 Thông tin môi trường
+### 1. Kiến trúc Hiển thị Dashboard (Private Access Pattern)
 
-- OS: **Ubuntu 22.04 (Jammy)** – Chạy trên EC2 instance trong private subnet  
-- PostgreSQL: **v18** (được cài đặt qua repo `apt.postgresql.org`)  
-- Shiny Server: File binary `.deb` từ RStudio (Posit)  
-- Service User: `shiny`  
-- Application Path: `/srv/shiny-server/sbw_dashboard/app.R`
+Ứng dụng **R Shiny Dashboard** được chạy trực tiếp trên EC2 Private `SCAJ_EC2_ShinyDWH`, truy vấn dữ liệu từ CSDL PostgreSQL Data Warehouse nội bộ và chỉ có thể truy cập qua **AWS SSM Session Manager Port Forwarding**:
+
+```
+[ Local Browser: localhost:3838 ] 
+               │
+      (SSM Port Forwarding)
+               ▼
+[ SSM Interface Endpoints ] ──▶ [ EC2 Private: R Shiny Server (Port 3838) ]
+                                                │
+                                    (PostgreSQL DWH: Port 5432)
+                                                ▼
+                                    [ DB: clickstream_dw ]
+```
 
 ---
 
-## 5.5.2 Cài các package hệ thống (system libs)
+### 2. Bước 1: Cài đặt Packages Hệ thống (System Dependencies)
 
-Lưu ý: Cần kích hoạt NAT Gateway trước khi tiến hành tải các package hệ thống.
-Kết nối vào EC2 thông qua **SSM Session Manager** (hoặc dùng SSH tạm thời, nếu được cấu hình), rồi thực thi:
-
-```bash
-# 1) Cập nhật danh sách package
-sudo apt-get update
-
-# 2) Cài đặt R (nếu hệ thống chưa có)
-sudo apt-get install -y r-base
-
-# 3) Cài đặt Postgres client & development headers (cần thiết cho RPostgres)
-#    Sử dụng postgresql-server-dev-18 nếu DB của bạn là PG 18
-#    (nếu dùng version khác, thay đổi 18 -> 14, 15, v.v. cho phù hợp)
-sudo apt-get install -y postgresql-client-18 postgresql-server-dev-18
-
-# 4) Cài đặt libpq và libssl (bắt buộc để compile RPostgres)
-sudo apt-get install -y libpq-dev libssl-dev
-
-# 5) (Trường hợp Shiny Server chưa được cài đặt)
-#    Bất kể phương pháp cài đặt là gì, hãy lưu ý các đường dẫn sau:
-#    - shiny-server service: /etc/systemd/system/shiny-server.service
-#    - thư mục chứa app: /srv/shiny-server/
-#    - user thực thi: shiny
-```
-
-Kiểm tra để chắc chắn `libpq` và các dev headers đã hiện diện:
+Truy cập EC2 Private qua **SSM Session Manager** (hoặc VPC Console), thực thi các lệnh cài đặt môi trường R và Postgres headers:
 
 ```bash
-dpkg -l | grep -E 'libpq-dev|postgresql-server-dev' || echo "MISSING_LIBS"
-ls -l /usr/include/postgresql/libpq-fe.h || echo "NO_LIBPQ_HEADER"
-```
+# 1. Cập nhật hệ thống Ubuntu 22.04 LTS
+sudo apt-get update -y
 
-Nếu **không hiển thị lỗi nào** → Quá trình cài đặt đã thành công.
+# 2. Cài đặt R Base và CSDL client headers (Bắt buộc để biên dịch RPostgres)
+sudo apt-get install -y r-base postgresql-client-18 postgresql-server-dev-18 libpq-dev libssl-dev
+
+# 3. Kiểm tra sự tồn tại của thư viện C/C++ Postgres headers
+ls -l /usr/include/postgresql/libpq-fe.h
+```
 
 ---
 
-## 5.5.3 Cấu hình thư mục R libraries cho user `shiny`
+### 3. Bước 2: Cài đặt R Packages dưới quyền user `shiny`
 
-Để Shiny Server có thể nạp các R package, chúng ta sẽ cài đặt chúng dưới quyền của user `shiny` tại thư mục:
-
-- `/home/shiny/R/x86_64-pc-linux-gnu-library/4.1`
-
-Chạy các lệnh sau:
+Thiết lập thư mục thư viện R và cài đặt các packages cần thiết cho Dashboard:
 
 ```bash
 sudo -u shiny R --vanilla <<'EOF'
-# Tạo thư mục library cho user shiny nếu nó chưa tồn tại
-dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
-
-# Chèn R_LIBS_USER lên vị trí đầu tiên của .libPaths()
-.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
-cat("LIBPATHS:
-"); print(.libPaths())
-
-q("no")
-EOF
-```
-
-Bạn sẽ thấy output `LIBPATHS` với dòng đầu tiên trỏ tới `/home/shiny/R/x86_64-pc-linux-gnu-library/4.1`.
-
----
-
-## 5.5.4 Cài các R package cần thiết
-
-Dashboard yêu cầu các package sau:
-
-- `shiny`
-- `DBI`
-- `RPostgres`
-- `dplyr`
-- `ggplot2`
-- `lubridate`
-- `pool`
-
-Cài đặt tất cả dưới quyền user `shiny`:
-
-```bash
-sudo -u shiny R --vanilla <<'EOF'
+# Tạo thư mục thư viện người dùng shiny
 dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
 .libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
-cat("LIBPATHS:
-"); print(.libPaths())
 
+# Cài đặt các R Packages phục vụ Dashboard & Database Connection Pool
 install.packages(
   c("shiny", "DBI", "RPostgres", "dplyr", "ggplot2", "lubridate", "pool"),
   repos = "https://cloud.r-project.org"
 )
 
+cat("Cài đặt R Packages thành công!\n")
 q("no")
 EOF
 ```
 
-💡 **Xử lý lỗi liên quan tới `libpq-fe.h` hoặc `libpq`:**
+---
 
-1. Xác minh lại rằng các gói `libpq-dev`, `postgresql-server-dev-XX`, và `libssl-dev` đã được cài đặt đầy đủ.  
-2. Chạy lại lệnh `install.packages("RPostgres", ...)` sau khi đã bổ sung các thư viện thiếu.  
+### 4. Bước 3: Triển khai Mã nguồn App R Shiny (`app.R`)
 
-Xác nhận các package có thể được nạp thành công:
+Khởi tạo thư mục ứng dụng và phân quyền cho user `shiny`:
 
 ```bash
-sudo -u shiny R --vanilla <<'EOF'
-.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
-cat("LIBPATHS:
-"); print(.libPaths())
+sudo mkdir -p /srv/shiny-server/sbw_dashboard
+sudo chown -R shiny:shiny /srv/shiny-server/sbw_dashboard
+```
 
+Tạo file `/srv/shiny-server/sbw_dashboard/app.R` với nội dung Dashboard hoàn chỉnh:
+
+```r
 library(shiny)
 library(DBI)
 library(RPostgres)
 library(dplyr)
 library(ggplot2)
-library(lubridate)
 library(pool)
 
-cat("All packages loaded OK
-")
-q("no")
-EOF
-```
-
-Nếu **không phát sinh error** → môi trường R đã sẵn sàng.
-
----
-
-## 5.5.5 Triển khai Shiny app
-
-### 5.5.5.1 Tạo thư mục app và copy code
-
-```bash
-sudo mkdir -p /srv/shiny-server/sbw_dashboard
-sudo chown -R shiny:shiny /srv/shiny-server/sbw_dashboard
-```
-
-Tạo file ứng dụng (hoặc ghi đè nếu đã có):
-
-```bash
-sudo nano /srv/shiny-server/sbw_dashboard/app.R
-# DÁN TOÀN BỘ CODE CỦA app.R (sử dụng phiên bản hoàn chỉnh của bạn)
-# Nhấn Ctrl+O, Enter, rồi Ctrl+X để lưu và thoát
-```
-
-Kiểm tra lại phân quyền để đảm bảo tính chính xác:
-
-```bash
-sudo chown shiny:shiny /srv/shiny-server/sbw_dashboard/app.R
-sudo chmod 644 /srv/shiny-server/sbw_dashboard/app.R
-```
-
-### 5.5.5.2 Restart Shiny Server
-
-```bash
-sudo systemctl restart shiny-server
-sudo systemctl status shiny-server
-```
-
----
-
-## 5.5.6 Kiểm tra app từ EC2 (local)
-
-Thông qua session SSM trên EC2 (giao diện terminal):
-
-```bash
-# Kiểm tra khả năng truy cập trang welcome của Shiny
-curl -m 5  -sS -o /dev/null -w "WELCOME HTTP %{http_code}
-"   http://127.0.0.1:3838/
-
-# Kiểm tra ứng dụng SBW dashboard
-curl -m 10 -sS -o /dev/null -w "DASHBOARD HTTP %{http_code}
-"   http://127.0.0.1:3838/sbw_dashboard/
-```
-
-Nếu kết quả trả về là `DASHBOARD HTTP 200` → app đang hoạt động ổn định.
-
-Nếu nhận được lỗi `500`:
-
-```bash
-LATEST=$(ls -1t /var/log/shiny-server/sbw_dashboard-shiny-*.log | head -n 1)
-echo "LATEST=$LATEST"
-sudo tail -n 100 "$LATEST"
-```
-
-Kiểm tra error log để tìm nguyên nhân và khắc phục.
-
----
-
-## 5.5.7 Truy cập dashboard từ máy local
-
-Do EC2 instance nằm trong **private subnet**, việc truy cập phải được thực hiện qua **SSM port forwarding**:
-
-```bash
-# Ví dụ sử dụng AWS CLI v2 trên máy tính local của bạn:
-aws ssm start-session   --target <INSTANCE_ID_PRIVATE>   --document-name AWS-StartPortForwardingSessionToRemoteHost   --parameters '{"host":["127.0.0.1"],"portNumber":["3838"],"localPortNumber":["3838"]}'
-```
-
-Khi session đã mở, hãy khởi động trình duyệt trên máy local và truy cập vào:
-
-```text
-http://127.0.0.1:3838/sbw_dashboard/
-```
-
-Giao diện dashboard sẽ xuất hiện với các thành phần như:
-
-- **Các KPI cards** (tổng hợp events, users, sessions, v.v.)  
-- Các biểu đồ về **events over time**, **event mix**, **events by login state**  
-- Tab **Products & Raw sample** (hỗ trợ phân trang, hiển thị dữ liệu mới nhất, và tự động làm mới mỗi 10s – phụ thuộc vào logic code app)
-
----
-
-## 5.5.8 Tóm tắt nhanh các lệnh quan trọng
-
-```bash
-# Cài đặt các thư viện hệ thống cần thiết
-sudo apt-get update
-sudo apt-get install -y r-base postgresql-client-18 postgresql-server-dev-18 libpq-dev libssl-dev
-
-# Cài đặt R packages dưới quyền user shiny
-sudo -u shiny R --vanilla <<'EOF'
-dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
-.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
-install.packages(
-  c("shiny", "DBI", "RPostgres", "dplyr", "ggplot2", "lubridate", "pool"),
-  repos = "https://cloud.r-project.org"
+# 1. Khởi tạo Connection Pool tới PostgreSQL DWH
+pool <- dbPool(
+  drv = RPostgres::Postgres(),
+  dbname = "clickstream_dw",
+  host = "127.0.0.1",
+  port = 5432,
+  user = "postgres",
+  password = "YourSecurePassword123!"
 )
-q("no")
-EOF
 
-# Triển khai mã nguồn app
-sudo mkdir -p /srv/shiny-server/sbw_dashboard
-sudo nano /srv/shiny-server/sbw_dashboard/app.R   # Dán mã nguồn tại đây
+onStop(function() {
+  poolClose(pool)
+})
+
+# 2. Định nghĩa Giao diện Người dùng UI
+ui <- fluidPage(
+  titlePanel("f5-SCAJ Clickstream Analytics Dashboard"),
+  
+  fluidRow(
+    column(4, wellPanel(h4("Tổng Events"), textOutput("total_events"))),
+    column(4, wellPanel(h4("Tổng Users"), textOutput("total_users"))),
+    column(4, wellPanel(h4("Tổng Sessions"), textOutput("total_sessions")))
+  ),
+  
+  hr(),
+  
+  fluidRow(
+    column(6, h4("Biểu đồ Phân bổ Sự kiện (Event Mix)"), plotOutput("event_mix_plot")),
+    column(6, h4("Top Sản phẩm máy tính được xem nhiều nhất"), plotOutput("top_products_plot"))
+  ),
+  
+  hr(),
+  
+  fluidRow(
+    column(12, h4("Dữ liệu Clickstream Mới nhất"), tableOutput("raw_table"))
+  )
+)
+
+# 3. Định nghĩa Logic Server Processing
+server <- function(input, output, session) {
+  
+  # Reactive Data Queries
+  events_data <- reactivePoll(10000, session,
+    checkFunc = function() {
+      dbGetQuery(pool, "SELECT COUNT(*) FROM public.clickstream_events")
+    },
+    valueFunc = function() {
+      dbGetQuery(pool, "SELECT * FROM public.clickstream_events ORDER BY event_timestamp DESC LIMIT 100")
+    }
+  )
+  
+  output$total_events <- renderText({ nrow(events_data()) })
+  output$total_users <- renderText({ length(unique(events_data()$user_id)) })
+  output$total_sessions <- renderText({ length(unique(events_data()$session_id)) })
+  
+  output$event_mix_plot <- renderPlot({
+    df <- events_data()
+    if(nrow(df) == 0) return(NULL)
+    ggplot(df, aes(x = event_name, fill = event_name)) +
+      geom_bar() +
+      theme_minimal() +
+      labs(x = "Tên Sự kiện", y = "Số lượng")
+  })
+  
+  output$top_products_plot <- renderPlot({
+    df <- events_data() %>% 
+      filter(!is.na(context_product_name)) %>%
+      group_by(context_product_name) %>%
+      summarise(views = n()) %>%
+      arrange(desc(views)) %>%
+      head(5)
+      
+    if(nrow(df) == 0) return(NULL)
+    ggplot(df, aes(x = reorder(context_product_name, views), y = views, fill = context_product_name)) +
+      geom_col() +
+      coord_flip() +
+      theme_minimal() +
+      labs(x = "Sản phẩm", y = "Lượt xem")
+  })
+  
+  output$raw_table <- renderTable({
+    events_data() %>% select(event_id, event_timestamp, event_name, user_login_state, context_product_name) %>% head(10)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+Khởi động lại dịch vụ Shiny Server:
+
+```bash
 sudo chown -R shiny:shiny /srv/shiny-server/sbw_dashboard
 sudo systemctl restart shiny-server
-
-# Xác nhận dashboard hoạt động
-curl -m 10 -sS -o /dev/null -w "DASHBOARD HTTP %{http_code}
-"   http://127.0.0.1:3838/sbw_dashboard/
 ```
+
+---
+
+### 5. Bước 4: Kết nối Dashboard qua SSM Port Forwarding
+
+Trên máy tính local của bạn (đã cài AWS CLI & SSM Plugin), mở terminal và chạy lệnh mở tunnel:
+
+```bash
+aws ssm start-session \
+  --target <INSTANCE_ID_PRIVATE_EC2> \
+  --document-name AWS-StartPortForwardingSessionToRemoteHost \
+  --parameters '{"host":["127.0.0.1"],"portNumber":["3838"],"localPortNumber":["3838"]}'
+```
+
+Mở trình duyệt local và truy cập đường dẫn:
+👉 **`http://127.0.0.1:3838/sbw_dashboard/`**
+
+---
+
+### 6. Kinh nghiệm Thực chiến & Gỡ lỗi (Troubleshooting)
+
+> [!WARNING]
+> **Sự cố 1: Lỗi `compilation failed for package 'RPostgres'`**
+> - **Nguyên nhân**: Thiếu gói thư viện hệ thống `libpq-dev` hoặc `postgresql-server-dev-18`.
+> - **Cách khắc phục**: Chạy `sudo apt-get install -y libpq-dev postgresql-server-dev-18` trước khi gọi `install.packages("RPostgres")`.
+
+> [!TIP]
+> **Sự cố 2: Shiny App trả về Lỗi HTTP 500**
+> - Mở xem log lỗi chi tiết của Shiny Server tại thư mục:
+> ```bash
+> sudo tail -n 100 /var/log/shiny-server/sbw_dashboard-shiny-*.log
+> ```

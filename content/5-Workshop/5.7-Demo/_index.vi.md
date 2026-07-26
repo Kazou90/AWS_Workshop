@@ -1,15 +1,15 @@
 ---
-title: "Demo"
+title: "Demo & Video hướng dẫn"
 weight: 57
 chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-## 5.7 Demo
+## 5.7 Demo Nền tảng Clickstream Analytics
 
-### Video Ghi Hình Workshop 🔗
+### 1. Video Ghi hình Thuyết minh & Trình diễn Workshop 🔗
 
-Xem lại toàn bộ buổi thuyết trình và phần trình diễn thực hành workshop bên dưới:
+Xem lại toàn bộ buổi thuyết trình dự án và phần trình diễn thực hành xây dựng pipeline Clickstream của Team **f5-SCAJ** bên dưới:
 
 {{< youtube j8ZJqfsTYlw >}}
 
@@ -17,10 +17,8 @@ Xem lại toàn bộ buổi thuyết trình và phần trình diễn thực hàn
 
 ---
 
-### Trải Nghiệm Ứng Dụng Thực Tế 🌐
+### 2. Trải nghiệm Ứng dụng Thực tế 🌐
 
-Truy cập hệ thống Clickstream E-Commerce đang hoạt động thực tế:
+Truy cập hệ thống Thương mại Điện tử và Hạ tầng Analytics đang vận hành thực tế:
 
-* **Trang web:** [http://hocvien.online/](http://hocvien.online/)
-
-
+* **Trang web E-Commerce Live:** [http://hocvien.online/](http://hocvien.online/)

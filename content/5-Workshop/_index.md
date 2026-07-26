@@ -5,87 +5,28 @@ chapter: false
 pre: "<b>5. </b>"
 ---
 
-# Batch-Based Clickstream Analytics Platform
+# Technical Hands-On Workshop: Batch-Based Clickstream Analytics Platform
 
 ![Architecture](/images/architecture.png)
-<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
 
-#### Overview
+<p align="center"><em>Figure 5.0: End-to-End Architecture of the f5-SCAJ Clickstream Analytics Platform.</em></p>
 
-This workshop walks through the deployment of a **Batch-Based Clickstream Analytics Platform** built for an e-commerce website selling computer products.
+#### Overview & Engineering Objectives
 
-The platform captures clickstream events emitted by the frontend, persists the raw JSON payloads in **Amazon S3**, runs scheduled ETL jobs (**AWS Lambda + EventBridge**), and loads the transformed records into a dedicated **PostgreSQL Data Warehouse on EC2** inside a private subnet.
+In this hands-on workshop, you will build a production-grade **Batch-Based Clickstream Analytics Platform** designed for an e-commerce laptop and computer accessories platform.
 
-Analytics dashboards are powered by **R Shiny**, deployed on the same EC2 instance as the Data Warehouse, and accessed securely via **AWS Systems Manager Session Manager**.
+Key Engineering Principles:
+- **Strict Separation of OLTP and Analytics**: Analytical queries do not degrade core e-commerce database operations.
+- **Private Analytical Backend**: The Data Warehouse and R Shiny dashboard run inside a **Private Subnet** with no public IP and zero open SSH ports.
+- **Zero-NAT Gateway Cost Optimization**: Uses **AWS S3 Gateway VPC Endpoint** and **SSM Interface VPC Endpoints** for private connectivity.
+- **Automated Serverless Batch ETL**: Ingests raw clickstream JSON events into S3 and executes hourly batch transformations via **EventBridge + AWS Lambda ETL**.
 
-The platform is designed around the following principles:
+#### Workshop Structure
 
-- A strict boundary between **OLTP and Analytics** workloads  
-- A fully private analytical backend (**no public-facing DW access**)  
-- Serverless AWS components to maximize cost-efficiency and scalability  
-- Zero-SSH admin access: all management is handled through **SSM Session Manager** into the private DW / Shiny EC2  
-- The Shiny app is accessible locally at **localhost:3838**
-
-#### Key Architecture Components
-
-**Frontend & OLTP Domain**
-
-- Next.js app: **`ClickSteam.NextJS`** hosted on **AWS Amplify Hosting**  
-- **Amazon CloudFront** as global CDN  
-- **Amazon Cognito** User Pool for authentication  
-- OLTP PostgreSQL on EC2: **`SBW_EC2_WebDB`** (public subnet)  
-  - DB: `clickstream_web` (schema `public`)  
-  - Port: `5432`  
-
-**Ingestion & Data Lake Domain**
-
-- **Amazon API Gateway (HTTP API)**: `clickstream-http-api`  
-  - Route: `POST /clickstream`  
-- **Lambda Ingest**: `clickstream-lambda-ingest`  
-  - Validates payload, enriches metadata, writes JSON files to S3  
-- **S3 Raw Clickstream Bucket**: `clickstream-s3-ingest`  
-  - Prefix: `events/YYYY/MM/DD/`  
-  - File pattern: `event-<uuid>.json`  
-  - `RAW_BUCKET = clickstream-s3-ingest`  
-
-**Analytics & Data Warehouse Domain**
-
-- **Private EC2 for DWH + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
-  - DWH DB: `clickstream_dw` 
-  - Main table: `clickstream_events` with fields:
-    - `event_id, event_timestamp, event_name`  
-    - `user_id, user_login_state, identity_source, client_id, session_id, is_first_visit`  
-    - `context_product_id, context_product_name, context_product_category, context_product_brand`  
-    - `context_product_price, context_product_discount_price, context_product_url_path`  
-  - R Shiny Server on port `3838`, web path `/sbw_dashboard`  
-
-- **Lambda ETL**: `SBW_Lamda_ETL` (VPC-enabled)  
-  - Reads raw JSON from `clickstream-s3-ingest`  
-  - Transforms into SQL-ready rows  
-  - Inserts into `clickstream_dw.public.clickstream_events`  
-
-- **EventBridge Rule**: `SBW_ETL_HOURLY_RULE`  
-  - Schedule: `rate(1 hour)`  
-
-- **VPC & Networking**
-
-  - VPC CIDR: `10.0.0.0/16`  
-  - Public subnet: `10.0.0.0/20` → `SBW_Project-subnet-public1-ap-southeast-1a` (OLTP EC2)  
-  - Private subnet: `10.0.128.0/20` → `SBW_Project-subnet-private1-ap-southeast-1a` (DW, Shiny, ETL Lambda)  
-  - **S3 Gateway VPC Endpoint** for private S3 access  
-  - **SSM Interface Endpoints** (SSM, SSMMessages, EC2Messages) for Session Manager  
-
-- **Admin Access (SSM)**  
-  - Port forwarding:
-    - `localPort = 3838`  
-    - `portNumber = 3838`  
-  - Shiny URL from local: `http://localhost:3838/sbw_dashboard`  
-
-#### Content Map
-
-1. **[5.1. Objectives & Scope](5.1-objectives--scope/)**  
-2. **[5.2. Architecture Walkthrough](5.2-architecture-walkthrough/)**  
-3. **[5.3. Implementing Clickstream Ingestion](5.3-implementing-clickstream-ingestion/)**  
-4. **[5.4. Building the Private Analytics Layer](5.4-building-private-analytics-layer/)**  
-5. **[5.5. Visualizing Analytics with Shiny Dashboards](5.5-visualizing-analytics-with-shiny-dashboards/)**  
-6. **[5.6. Summary & Clean up](5.6-summary-cleanup/)**
+1. **[5.1. Lab Objectives & Scope](5.1-objectives--scope/)** - Business requirements, learning goals, and design boundaries.
+2. **[5.2. Architecture Walkthrough](5.2-architecture-walkthrough/)** - Detailed breakdown of all 20 AWS components and data movement.
+3. **[5.3. Implementing Clickstream Ingestion](5.3-implementing-clickstream-ingestion/)** - Configure API Gateway, deploy Lambda Ingest, design S3 Raw Data Lake, and wire Next.js SDK.
+4. **[5.4. Building the Private Analytics Layer](5.4-building-the-private-analytics-layer/)** - Provision VPC subnets, VPC Endpoints, PostgreSQL DWH on EC2 Private, Lambda ETL, and EventBridge hourly trigger.
+5. **[5.5. Visualizing Analytics with Shiny Dashboards](5.5-visualizing-analytics-with-shiny-dashboards/)** - Package installation, R Shiny Server deployment, and secure local access via SSM Port Forwarding.
+6. **[5.6. Summary & Clean-up](5.6-summary--clean-up/)** - Engineering insights, cost analysis, and step-by-step teardown guide.
+7. **[5.7. Demo & Video Recording](5.7-demo/)** - Live website showcase and recorded demonstration video.

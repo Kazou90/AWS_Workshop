@@ -1,82 +1,58 @@
 ---
-title: "Summary & Clean up"
+title: "Summary & Clean-up"
 weight: 56
 chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-## 5.6.1 Summary
+### 1. Technical Engineering Achievements Summary
 
-With the lab complete, we have successfully deployed a functional **Clickstream Analytics Platform**:
+By completing this workshop, you have designed and deployed a production-grade **Batch-Based Clickstream Analytics Platform** featuring enterprise cloud patterns:
 
-1. **User-Facing Layer**
-   - The Next.js application (`ClickSteam.NextJS`) hosted via Amplify and CloudFront  
-   - Identity management and authentication powered by Cognito  
-   - A PostgreSQL OLTP database (`clickstream_web`) running on `SBW_EC2_WebDB` (located in a public subnet)  
+```
+[ Frontend: Next.js + Amplify ] ──▶ [ Serverless Ingestion ] ──▶ [ S3 Raw Data Lake ]
+                                                                        │
+                                                              (Gateway VPC Endpoint)
+                                                                        ▼
+[ SSM Port Forward: 3838 ] ◄── [ R Shiny Dashboard ] ◄── [ Private DWH Postgres ] ◄── [ Lambda ETL (VPC) ]
+```
 
-2. **Ingestion & Raw Data Layer**
-   - The API Gateway HTTP API: `clickstream-http-api` (exposing `POST /clickstream`)  
-   - The Lambda Ingest function: `clickstream-lambda-ingest`  
-   - The S3 Raw storage bucket: `clickstream-s3-ingest/events/YYYY/MM/DD/event-<uuid>.json`  
-
-3. **Private Analytics Layer**
-   - A custom VPC configured with both public and private subnets (`SBW_Project_VPC`)  
-   - Secure routing via an S3 Gateway Endpoint and SSM Interface Endpoints  
-   - A Data Warehouse on EC2: `SBW_EC2_ShinyDWH`, managing the `clickstream_dw` database  
-   - A VPC-bound ETL Lambda: `SBW_Lamda_ETL`, invoked on schedule by `SBW_ETL_HOURLY_RULE`  
-   - Analytics visualizations via R Shiny dashboards (`sbw_dashboard`), securely accessed through SSM port forwarding  
-
-In summary, this architecture highlights best practices for designing a **batch-based analytics platform** that prioritizes security and cost optimization, utilizing a mix of serverless services and targeted EC2 compute.
+1. **Strict Separation of Concerns**:
+   - The OLTP workload (`SCAJ_EC2_WebDB`) and Analytics DWH (`SCAJ_EC2_ShinyDWH`) are completely separated physically and logically.
+2. **Zero-Trust Infrastructure Baseline**:
+   - Data Warehouse and R Shiny Server reside inside a **Private Subnet** with no public IP and zero open SSH ports.
+   - Secure admin access via **AWS SSM Session Manager Port Forwarding**.
+3. **Zero-NAT Cost Optimization Pattern**:
+   - Eliminates expensive NAT Gateway hourly charges by deploying an **S3 Gateway VPC Endpoint** for Lambda ETL data access.
+   - Total estimated infrastructure cost: ~$2.65 USD/month.
 
 ---
 
-## 5.6.2 Key Takeaways
+### 2. AWS Resource Teardown Checklist
 
-- **Separation of concerns**:
-  - The OLTP and Analytics workloads are strictly separated across two different EC2 instances, isolating their logical domains and performance requirements.  
+> [!IMPORTANT]
+> To prevent unexpected recurring AWS charges, follow the resource destruction sequence below in exact dependency order:
 
-- **Security**:
-  - The Data Warehouse and Shiny Server operate in a private subnet, shielded from direct internet access.  
-  - SSH access is entirely replaced by the more secure SSM Session Manager.  
-  - The S3 Gateway Endpoint ensures that S3 traffic never leaves the AWS private backbone.  
+#### Step 1: Tear Down Frontend & Ingestion Layer
+- **AWS Amplify**: Delete application `ClickSteam.NextJS` (Automatically cleans up CloudFront CDN distribution).
+- **Amazon API Gateway**: Delete HTTP API `clickstream-http-api`.
+- **AWS Lambda Functions**: Delete functions:
+  - `clickstream-lambda-ingest`
+  - `SCAJ_Lambda_ETL`
 
-- **Cost optimization**:
-  - The architecture completely avoids the cost of a NAT Gateway.  
-  - The ETL pipeline is driven by cost-effective serverless components (Lambda + EventBridge).  
-  - Amazon S3 provides highly durable, low-cost storage for the raw event data.  
+#### Step 2: Tear Down Scheduling & Storage Layer
+- **Amazon EventBridge**: Delete Rule `SCAJ_ETL_HOURLY_RULE`.
+- **Amazon S3 Buckets**:
+  - Open S3 Console -> Execute **Empty Bucket** for all objects.
+  - Delete buckets: `clickstream-s3-ingest` and `clickstream-s3-scaj`.
 
-- **Easy to extend**:
-  - While currently engineered for batch processing, the foundation can be adapted for real-time streaming, advanced machine learning analytics, or migrated to enterprise-grade DW solutions.
-
----
-
-## 5.6.3 Resource Clean-up
-
-1. **Amplify & CloudFront**
-   - Delete the Amplify application (`ClickSteam.NextJS`).  
-   - This process automatically tears down the associated CloudFront distribution.
-
-2. **API Gateway & Lambda**
-   - Remove the `clickstream-http-api` API Gateway.  
-   - Delete the following Lambda functions:
-     - `clickstream-lambda-ingest`  
-     - `SBW_Lamda_ETL`  
-
-3. **EventBridge**
-   - Delete the scheduling rule named `SBW_ETL_HOURLY_RULE`.  
-
-4. **S3 Buckets**
-   - Empty the contents, then delete the following buckets:
-     - `clickstream-s3-ingest` (the RAW clickstream store)  
-     - `clickstream-s3-sbw` (the assets bucket), provided it is not shared with other projects  
-
-5. **EC2 Instances**
-   - Stop or permanently terminate:
-     - `SBW_EC2_WebDB`  
-     - `SBW_EC2_ShinyDWH`  
-   - Release any Elastic IPs that were attached to these instances.
-
-6. **VPC & Networking**
-   - Remove all VPC endpoints (S3 Gateway, and all SSM Interface Endpoints).  
-   - Delete the route tables, subnets, and finally the Internet Gateway.  
-   - Once empty, delete the `SBW_Project_VPC` itself.
+#### Step 3: Terminate EC2 Compute & Network Topology
+- **Amazon EC2 Instances**:
+  - Select and **Terminate**: `SCAJ_EC2_WebDB` and `SCAJ_EC2_ShinyDWH`.
+  - Release any associated Elastic IPs.
+- **AWS VPC Endpoints**:
+  - Delete **S3 Gateway VPC Endpoint**.
+  - Delete 3 **SSM Interface VPC Endpoints** (`ssm`, `ssmmessages`, `ec2messages`).
+- **AWS VPC Infrastructure**:
+  - Delete Subnets, Route Tables, Internet Gateway.
+  - Delete VPC `SCAJ_Project_VPC`.

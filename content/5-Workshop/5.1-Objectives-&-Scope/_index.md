@@ -1,105 +1,71 @@
 ---
-title: "Objectives & Scope"
+title: "Lab Objectives & Scope"
 weight: 51
 chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-### Business Context
+### 1. Business Context & Engineering Challenge
 
-The target system is an e-commerce website that sells laptops, monitors, and computer accessories.  
-The business wants to:
+The target platform is a specialized e-commerce web application selling laptops, monitors, and computer hardware. To drive data-backed sales strategies and optimize digital marketing spend, the business requires a robust Clickstream Analytics Platform.
 
-- Gain insight into **how users engage** with the website:
-  - Which pages they navigate to
-  - Which products they browse and view
-  - Add-to-cart and checkout interactions
-- Measure the **conversion funnel** across the journey: product view → add to cart → checkout
-- Pinpoint:
-  - High-performing products (bestsellers / most-viewed)
-  - Peak traffic windows (by hour and by day)
-- Leverage these insights to craft effective marketing strategies that:
-  - Grow revenue
-  - Optimize spending and reduce unnecessary costs
-
-To accomplish this, the platform:
-
-- Captures a dataset of user behavioral signals through clickstream events, then produces statistics and analytical reports.
+#### Key Business Questions Addressed:
+- **User Journey & Funnel Analysis**: How do users navigate from Home -> Product View -> Add to Cart (`add_to_cart`) -> Checkout Completion (`checkout`)? Where are the highest drop-off points?
+- **Product Engagement**: Which computer items generate high page views but low purchase conversions?
+- **Traffic Patterning**: What are the peak activity windows during the day/week to target flash sales?
 
 ---
 
-### Learning Objectives
+### 2. Learning Objectives & Hands-On Engineering Skills
 
-#### Understand the Architecture
+By completing this workshop lab, you will master essential Cloud Infrastructure & Data Pipeline patterns:
 
-- Be able to walk through the end-to-end architecture of a **batch-based clickstream analytics platform** that uses:
-  - Amplify, CloudFront, Cognito, EC2 OLTP in the **user-facing domain**
-  - API Gateway, Lambda Ingest, S3 Raw bucket in the **ingestion & data lake domain**
-  - ETL Lambda, PostgreSQL DW on EC2, R Shiny in the **analytics & DW domain**
-- Be able to articulate why OLTP and Analytics are kept separate:
-  - **Logical**: different database schemas, different types of workloads
-  - **Physical**: public subnet vs. private subnet, two distinct EC2 instances
+```
+[ Frontend: Next.js + Amplify ] 
+        │ (POST /clickstream)
+        ▼
+[ API Gateway + Lambda Ingest ] ──▶ [ S3 Raw Bucket (events/YYYY/MM/DD/HH/) ]
+                                              │
+                                     (S3 Gateway Endpoint)
+                                              ▼
+[ EventBridge (Hourly Cron) ] ──▶ [ Lambda ETL (VPC Private) ] ──▶ [ EC2 Private DWH (PostgreSQL) ]
+                                                                             │
+                                                                   (Port Forward 3838 via SSM)
+                                                                             ▼
+                                                                 [ R Shiny Admin Dashboard ]
+```
 
-#### Hands-on Skills
-
-- Send clickstream events from the frontend through API Gateway → Lambda Ingest → S3 Raw (`clickstream-s3-ingest`).
-- Set up a **Gateway VPC Endpoint for S3** and update the private route table so private components can reach S3.
-- Configure and validate an **ETL Lambda** (`SBW_Lamda_ETL`) capable of:
-  - Reading raw JSON files from `s3://clickstream-s3-ingest/events/YYYY/MM/DD/`
-  - Transforming events into rows for the table `clickstream_dw.public.clickstream_events`
-- Connect to the DW (`SBW_EC2_ShinyDWH`) and execute sample SQL queries:
-  - Event count
-  - Top products
-  - Basic funnel analysis
-- Access **R Shiny dashboards** through SSM port forwarding and interpret:
-  - Funnel charts
-  - Product engagement visualizations
-  - Time-series activity charts
-
-#### Security & Cost Awareness
-
-- Understand why user behavioral data is protected by placing `EC2_ShinyDWH` and `Lambda_ETL` inside **private subnets**:
-  - Only `Lambda_ETL` is allowed to reach S3 via a **Gateway VPC Endpoint**
-  - Only administrators can access `EC2_ShinyDWH` via SSM using **Interface VPC Endpoints**
-- Recognize the principal security controls in place:
-  - Separation of public and private subnets
-  - Security group boundaries between `sg_oltp_webDB`, `sg_Lambda_ETL`, `sg_analytics_ShinyDWH`
-  - Least-privilege IAM permissions scoped per Lambda function
-  - Zero-SSH administration via AWS Systems Manager Session Manager (no bastion host, no open SSH port).
+1. **Private Cloud Infrastructure Design**:
+   - Strictly segregate OLTP workloads (Public Subnet) from Analytics (Private Subnet).
+   - Secure the Data Warehouse and R Shiny dashboard completely out of public internet reach.
+2. **Serverless Ingestion & Data Lake Architecture**:
+   - Build a stateless HTTP API Gateway backed by an ingestion Lambda.
+   - Design an S3 Data Lake layout with UTC hour-based partitioning (`events/YYYY/MM/DD/HH/`).
+3. **VPC Endpoints & Cost Management**:
+   - Configure an **S3 Gateway VPC Endpoint** so Lambda ETL reads S3 over AWS internal network backbone, avoiding 100% of NAT Gateway charges.
+   - Provision **SSM Interface Endpoints** (`ssm`, `ssmmessages`, `ec2messages`) for zero-SSH management.
+4. **ETL Pipeline & Data Visualization**:
+   - Develop a Lambda ETL function to parse raw JSON payloads, flatten fields, and upsert records into PostgreSQL DWH.
+   - Deploy R Shiny Server to render conversion funnels, product ranking matrices, and activity trends.
 
 ---
 
-### Workshop Scope
+### 3. Lab Scope Boundaries
 
-The workshop concentrates on three core capability areas:
-
-1. **Implementing the clickstream ingestion layer**
-
-   - Capture browser-side interactions within the Next.js frontend
-   - Push JSON events to API Gateway (`clickstream-http-api`)
-   - Persistently store raw events over time in `clickstream-s3-ingest`
-
-2. **Building the private analytics layer**
-
-   - Provision the VPC, subnets, route tables, and VPC endpoints
-   - Run `SBW_Lamda_ETL` inside the VPC
-   - Wire the ETL Lambda to the private EC2 Data Warehouse (`SBW_EC2_ShinyDWH`)
-
-3. **Visualizing analytics with Shiny dashboards**
-   - Query `clickstream_dw` directly from R Shiny
-   - Render funnels, product performance metrics, and time-based trends
-   - Access Shiny through **SSM Session Manager port forwarding**
+| Area | In-Scope | Out-of-Scope |
+| --- | --- | --- |
+| **Data Processing Model** | Batch-based (Hourly cron execution) | Real-time event streaming (Kinesis / Kafka / MSK) |
+| **Data Warehouse** | PostgreSQL on EC2 (Ubuntu 22.04 LTS) | Managed DWH (Amazon Redshift / Snowflake) |
+| **Authentication & Access** | AWS SSM Session Manager Port Forwarding | Public SSH access, Bastion Host |
+| **ETL & Scheduling** | AWS Lambda + EventBridge Cron Rule | Apache Airflow / AWS Glue Orchestration |
+| **Network Security** | VPC Endpoints, SG Scoping, IAM Least Privilege | Multi-account VPC Peering, Complex WAF Rules |
 
 ---
 
-### Out of Scope
+### 4. Target Infrastructure Specifications
 
-To keep the workshop focused and achievable, we **do not** cover in depth:
-
-- Real-time streaming solutions (Kinesis, Kafka, MSK, …)
-- Managed DW services (Amazon Redshift / Redshift Serverless)
-- Recommendation engines, user segmentation, or ML-based anomaly detection
-- Production-grade CI/CD pipelines, blue/green deployments, or multi-account architectures
-- Advanced SQL performance tuning or detailed index strategy
-
-These represent natural next steps once the batch-based clickstream foundation established in this workshop is operational.
+- **VPC Network**: CIDR `10.0.0.0/16` (`SCAJ_Project_VPC`)
+- **Public Subnet**: `10.0.0.0/20` (For EC2 OLTP `SCAJ_EC2_WebDB`)
+- **Private Subnet**: `10.0.128.0/20` (For DWH `SCAJ_EC2_ShinyDWH` & Lambda ETL)
+- **Data Warehouse DB**: PostgreSQL 18 (`clickstream_dw`), Table: `clickstream_events`
+- **Dashboard Port**: R Shiny Server port `3838`, Path `/sbw_dashboard/`

@@ -5,7 +5,7 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Team Super Beast Warrior(SBW)
+# Team f5-SCAJ
 
 # Batch-based Clickstream Analytics Platform
 
